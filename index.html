@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>라운드 · ROUND — 10분 로테이션 소개팅</title>
+<meta name="description" content="하루 저녁, 10명과 10분씩. 감정 낭비 없이 취향 맞는 사람을 만나는 로테이션 소개팅 ROUND 라운드.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ROUND 라운드">
+<meta property="og:title" content="라운드 · ROUND — 10분 로테이션 소개팅">
+<meta property="og:description" content="하루 저녁, 10명과 10분씩. 감정 낭비 없이 취향 맞는 사람을 만나는 로테이션 소개팅.">
+<meta property="og:url" content="https://social-sample.lgt3232.workers.dev/">
+<meta property="og:image" content="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1200&h=630&q=80">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="라운드 · ROUND — 10분 로테이션 소개팅">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1200&h=630&q=80">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='9' fill='%23F5512E'/><circle cx='16' cy='16' r='7' fill='none' stroke='%23FFFFFF' stroke-width='2.4'/><circle cx='16' cy='9' r='2.1' fill='%23FFFFFF'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+:root{
+  --bg:#FBF4EC; --paper:#FFFFFF; --cream:#FFF9F2;
+  --ink:#2A211C; --muted:#7C6F64; --faint:#A99C8F;
+  --coral:#F5512E; --coral-d:#D63E1E; --coral-soft:#FFE7DE;
+  --plum:#6A2B4E; --plum-soft:#F3E2EC; --butter:#FFC95E;
+  --line:#EFE5D9; --line2:#E4D7C8;
+  --radius:20px; --radius-s:14px;
+  --shadow:0 18px 50px -24px rgba(120,60,30,.35);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:"Pretendard",sans-serif;line-height:1.65;word-break:keep-all;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.pop{font-family:"Poppins",sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.kicker{display:inline-block;font-family:"Poppins";font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--coral);font-weight:700}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:40px;font-weight:700;font-size:.95rem;cursor:pointer;border:2px solid transparent;transition:transform .18s ease,box-shadow .18s ease,background .18s ease,color .18s}
+.btn--coral{background:var(--coral);color:#fff;box-shadow:0 10px 24px -10px rgba(245,81,46,.7)}
+.btn--coral:hover{transform:translateY(-2px);box-shadow:0 16px 30px -10px rgba(245,81,46,.75)}
+.btn--ghost{background:#fff;border-color:var(--line2);color:var(--ink)}
+.btn--ghost:hover{border-color:var(--coral);color:var(--coral)}
+.btn--sm{padding:10px 18px;font-size:.86rem}
+
+.reveal{opacity:1;transform:none}
+@media(min-width:881px){
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .45s ease,transform .45s ease}
+  .reveal.in{opacity:1;transform:none}
+}
+
+/* 상단바 */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:14px 24px;background:rgba(251,244,236,.86);backdrop-filter:saturate(1.2);border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s}
+.topbar.solid{border-color:var(--line);box-shadow:0 6px 24px -18px rgba(120,60,30,.5)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:1.24rem;letter-spacing:-.01em}
+.brand .mark{width:26px;height:26px;border-radius:9px;background:var(--coral);position:relative;flex:none}
+.brand .mark::before{content:"";position:absolute;inset:6px;border-radius:50%;border:2.4px solid #fff}
+.brand .mark::after{content:"";position:absolute;left:50%;top:3px;width:4px;height:4px;border-radius:50%;background:#fff;transform:translateX(-50%)}
+.brand b{color:var(--coral)}
+.nav{display:flex;align-items:center;gap:28px}
+.nav a{font-size:.92rem;font-weight:600;color:var(--muted);transition:color .2s}
+.nav a:hover{color:var(--ink)}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:6px}
+.burger span{width:24px;height:2px;background:var(--ink);display:block;border-radius:2px}
+
+.drawer{position:fixed;inset:0;z-index:55;background:rgba(251,244,236,.98);display:none;flex-direction:column;align-items:center;justify-content:center;gap:24px}
+.drawer.open{display:flex}
+.drawer a{font-size:1.5rem;font-weight:700}
+
+/* 히어로 */
+.hero{position:relative;padding:130px 0 70px;overflow:hidden}
+.hero__bg{position:absolute;inset:0;z-index:0}
+.hero__bg img{width:100%;height:100%;object-fit:cover;opacity:.22}
+.hero__bg::after{content:"";position:absolute;inset:0;background:radial-gradient(90% 70% at 85% 10%,rgba(255,201,94,.28),transparent 55%),linear-gradient(180deg,rgba(251,244,236,.7),var(--bg) 86%)}
+.hero__in{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(2.5rem,6vw,4.2rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin:16px 0 0}
+.hero h1 .c{color:var(--coral)}
+.hero__sub{font-size:clamp(1.05rem,2.2vw,1.28rem);color:var(--muted);margin-top:20px;font-weight:500;max-width:24ch}
+.hero__btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.trust-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.chip{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:30px;padding:8px 15px;font-size:.84rem;font-weight:600;color:var(--ink)}
+.chip i{width:7px;height:7px;border-radius:50%;background:var(--coral);display:inline-block}
+
+/* 로테이션 다이어그램 (시그니처) */
+.rot{position:relative;width:330px;height:330px;margin:0 auto;max-width:84vw}
+.rot__ring{position:absolute;inset:0;animation:spin 26s linear infinite}
+.rot__seat{position:absolute;top:50%;left:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;color:#fff;box-shadow:0 6px 14px -6px rgba(0,0,0,.3)}
+.rot__seat.m{background:var(--coral)}
+.rot__seat.f{background:var(--plum)}
+.rot__hub{position:absolute;top:50%;left:50%;width:128px;height:128px;margin:-64px 0 0 -64px;border-radius:50%;background:#fff;border:2px dashed var(--line2);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.rot__hub .n{font-family:"Poppins";font-weight:800;font-size:2rem;color:var(--coral);line-height:1}
+.rot__hub .t{font-size:.78rem;color:var(--muted);font-weight:600;margin-top:3px}
+.rot__arrow{position:absolute;top:50%;left:50%;width:200px;height:200px;margin:-100px 0 0 -100px;border-radius:50%;border:2px solid var(--coral-soft);border-top-color:var(--coral);animation:spin 8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.rot__ring,.rot__arrow{animation:none}}
+
+section{position:relative}
+.sec{padding:88px 0}
+.sec-head{text-align:center;max-width:46ch;margin:0 auto 46px}
+.sec-head h2{font-size:clamp(1.8rem,4.4vw,2.7rem);font-weight:800;letter-spacing:-.02em;margin-top:12px;line-height:1.16}
+.sec-head p{color:var(--muted);margin-top:14px;font-weight:500}
+
+/* 진행방식 스텝 */
+#how{background:linear-gradient(180deg,var(--bg),var(--cream))}
+.how-grid{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center}
+.steps{display:grid;gap:14px}
+.step{display:flex;gap:16px;background:#fff;border:1px solid var(--line);border-radius:var(--radius-s);padding:18px 20px;transition:transform .2s,box-shadow .2s}
+.step:hover{transform:translateX(4px);box-shadow:var(--shadow)}
+.step__n{flex:none;width:38px;height:38px;border-radius:50%;background:var(--coral-soft);color:var(--coral-d);font-family:"Poppins";font-weight:800;display:flex;align-items:center;justify-content:center}
+.step__b h4{font-size:1.08rem;font-weight:700}
+.step__b p{color:var(--muted);font-size:.92rem;margin-top:3px}
+
+/* 안심/인증 */
+#trust{background:var(--cream)}
+.tcards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tcard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px}
+.tcard .ic{width:50px;height:50px;border-radius:14px;background:var(--plum-soft);color:var(--plum);display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:800}
+.tcard h4{font-size:1.12rem;font-weight:700;margin:16px 0 8px}
+.tcard p{color:var(--muted);font-size:.94rem}
+
+/* 회차 (모집-퍼스트) */
+#rounds{background:var(--bg)}
+.round-list{display:grid;gap:14px}
+.round{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px 24px;transition:box-shadow .2s,border-color .2s}
+.round:hover{box-shadow:var(--shadow);border-color:var(--coral-soft)}
+.round__date{text-align:center;min-width:62px}
+.round__date .d{font-family:"Poppins";font-weight:800;font-size:1.7rem;color:var(--coral);line-height:1}
+.round__date .m{font-size:.74rem;color:var(--muted);font-weight:600;letter-spacing:.04em}
+.round__info h4{font-size:1.12rem;font-weight:700}
+.round__meta{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:7px;color:var(--muted);font-size:.88rem;font-weight:500}
+.round__meta b{color:var(--ink);font-weight:700}
+.round__cta{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.badge{font-size:.72rem;font-weight:700;padding:4px 11px;border-radius:30px}
+.badge--open{background:var(--coral-soft);color:var(--coral-d)}
+.badge--soon{background:#FFF1CE;color:#A9791A}
+.badge--full{background:#EFEAE3;color:var(--faint)}
+
+/* 테마 */
+#themes{background:linear-gradient(180deg,var(--bg),var(--cream))}
+.theme-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.theme{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:3/4;background:var(--plum)}
+.theme img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.theme:hover img{transform:scale(1.06)}
+.theme::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(42,33,28,.78))}
+.theme span{position:absolute;left:16px;bottom:14px;z-index:2;color:#fff;font-weight:700;font-size:1.05rem}
+.theme small{position:absolute;left:16px;bottom:38px;z-index:2;color:rgba(255,255,255,.8);font-size:.74rem;font-family:"Poppins";letter-spacing:.08em;text-transform:uppercase}
+
+/* 후기 + 통계 */
+#voices{background:var(--cream)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:36px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px 20px;text-align:center}
+.stat .num{font-family:"Poppins";font-weight:800;font-size:2.4rem;color:var(--coral);line-height:1}
+.stat .lab{color:var(--muted);font-size:.9rem;font-weight:600;margin-top:8px}
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.review{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+.review .star{color:var(--butter);font-size:.95rem;letter-spacing:1px}
+.review p{margin:12px 0;font-size:.95rem;line-height:1.6}
+.review .who{color:var(--muted);font-size:.84rem;font-weight:600}
+
+/* 참가 신청 */
+#apply{background:var(--bg)}
+.apply-card{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:42px;max-width:760px;margin:0 auto}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form .full{grid-column:1/3}
+.field label{display:block;font-size:.82rem;color:var(--muted);font-weight:600;margin-bottom:7px}
+.field input,.field select,.field textarea{width:100%;background:var(--cream);border:1px solid var(--line2);border-radius:12px;padding:13px 14px;color:var(--ink);font-family:inherit;font-size:.95rem;transition:border .2s,box-shadow .2s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--coral);box-shadow:0 0 0 3px rgba(245,81,46,.14);background:#fff}
+.field textarea{resize:vertical;min-height:84px}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%237C6F64' stroke-width='1.6'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.apply-note{text-align:center;color:var(--faint);font-size:.82rem;margin-top:16px}
+
+/* FAQ */
+#faq{background:var(--cream)}
+.faq{max-width:760px;margin:0 auto;display:grid;gap:12px}
+.qa{background:#fff;border:1px solid var(--line);border-radius:var(--radius-s);overflow:hidden}
+.qa button{width:100%;text-align:left;background:none;border:0;padding:20px 22px;font-size:1.02rem;font-weight:700;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;font-family:inherit}
+.qa button .x{flex:none;color:var(--coral);font-size:1.3rem;transition:transform .25s}
+.qa.open button .x{transform:rotate(45deg)}
+.qa .a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.qa.open .a{max-height:240px}
+.qa .a p{padding:0 22px 20px;color:var(--muted);font-size:.94rem}
+
+footer{background:var(--ink);color:#fff;padding:54px 0 110px}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;align-items:flex-end}
+.foot__brand{font-weight:800;font-size:1.4rem}
+.foot small{color:rgba(255,255,255,.55);font-size:.82rem;line-height:1.9;display:block;margin-top:10px}
+.foot__sns{display:flex;gap:18px}
+.foot__sns a{color:rgba(255,255,255,.8);font-size:.86rem;font-weight:600}
+.foot__sns a:hover{color:var(--butter)}
+
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;grid-template-columns:1fr 1.4fr;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line2)}
+.mbar a{display:flex;align-items:center;justify-content:center;gap:7px;padding:13px;border-radius:30px;font-size:.92rem;font-weight:700}
+.mbar .m-kakao{border:2px solid var(--line2);color:var(--ink)}
+.mbar .m-apply{background:var(--coral);color:#fff}
+
+@media(max-width:880px){
+  .nav{display:none}.burger{display:flex}
+  .hero__in{grid-template-columns:1fr;gap:30px}
+  .hero .rot{order:-1}
+  .how-grid{grid-template-columns:1fr;gap:32px}
+  .rot{margin:0 auto}
+  .tcards,.theme-grid,.stats,.reviews{grid-template-columns:1fr}
+  .theme-grid{grid-template-columns:1fr 1fr}.theme{aspect-ratio:1}
+  .round{grid-template-columns:auto 1fr;gap:14px}
+  .round__cta{grid-column:1/3;flex-direction:row;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:12px;margin-top:2px}
+  .form{grid-template-columns:1fr}.form .full{grid-column:1}
+  .apply-card{padding:26px}
+  .mbar{display:grid}body{padding-bottom:72px}
+  .sec{padding:64px 0}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar" id="topbar">
+  <a href="#top" class="brand"><span class="mark"></span> 라운<b>드</b></a>
+  <nav class="nav">
+    <a href="#how">진행 방식</a>
+    <a href="#rounds">다가오는 회차</a>
+    <a href="#voices">후기</a>
+    <a href="#faq">FAQ</a>
+    <a href="#apply" class="btn btn--coral btn--sm">참가 신청</a>
+  </nav>
+  <button class="burger" id="burger" aria-label="메뉴"><span></span><span></span><span></span></button>
+</div>
+<div class="drawer" id="drawer">
+  <a href="#how">진행 방식</a>
+  <a href="#rounds">다가오는 회차</a>
+  <a href="#voices">후기</a>
+  <a href="#faq">FAQ</a>
+  <a href="#apply">참가 신청</a>
+</div>
+
+<!-- 히어로 -->
+<header class="hero" id="top">
+  <div class="hero__bg"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1500&q=80" alt="따뜻한 분위기의 모임 테이블" loading="eager"></div>
+  <div class="wrap hero__in">
+    <div>
+      <span class="kicker">10분 로테이션 소개팅</span>
+      <h1>하루 저녁,<br><span class="c">10명</span>과 10분씩.</h1>
+      <p class="hero__sub">감정 낭비 없이, 취향 맞는 사람만. 한자리에 모여 10분씩 대화하고, 마음에 든 사람에게만 애프터를 신청해요.</p>
+      <div class="hero__btns">
+        <a href="#rounds" class="btn btn--coral">다가오는 회차 보기</a>
+        <a href="#how" class="btn btn--ghost">진행 방식</a>
+      </div>
+      <div class="trust-row">
+        <span class="chip"><i></i>직장·미혼 인증</span>
+        <span class="chip"><i></i>성비 1:1 보장</span>
+        <span class="chip"><i></i>누적 1,200+ 참여</span>
+      </div>
+    </div>
+    <div class="rot" id="rot" aria-hidden="true">
+      <div class="rot__arrow"></div>
+      <div class="rot__ring" id="rotRing"></div>
+      <div class="rot__hub"><span class="n pop">10</span><span class="t">분마다 자리 이동</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- 진행 방식 -->
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">How it works</span>
+      <h2>이렇게 진행돼요</h2>
+      <p>처음 만나는 어색함도, 1:1 소개팅의 부담도 없이. 4단계로 끝나요.</p>
+    </div>
+    <div class="how-grid">
+      <div class="rot reveal" aria-hidden="true">
+        <div class="rot__arrow"></div>
+        <div class="rot__ring" id="rotRing2"></div>
+        <div class="rot__hub"><span class="n pop">1:1</span><span class="t">성비 보장</span></div>
+      </div>
+      <div class="steps reveal">
+        <div class="step"><div class="step__n pop">1</div><div class="step__b"><h4>신청 · 인증</h4><p>직장·미혼·본인 인증 후 회차를 신청해요. 검증된 사람만 한자리에.</p></div></div>
+        <div class="step"><div class="step__n pop">2</div><div class="step__b"><h4>10분 로테이션</h4><p>한자리에 모여 10분씩 대화하고 자리를 옮겨요. 2~3시간에 10명 이상과 만남.</p></div></div>
+        <div class="step"><div class="step__n pop">3</div><div class="step__b"><h4>애프터 선택</h4><p>마음에 든 사람에게만 비공개로 애프터를 신청해요. 거절돼도 서로 모르게.</p></div></div>
+        <div class="step"><div class="step__n pop">4</div><div class="step__b"><h4>매칭</h4><p>서로 선택이 맞으면 연락처를 교환. 그날 바로 다음 약속으로 이어져요.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 안심 / 인증 -->
+<section class="sec" id="trust">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Safe & Verified</span>
+      <h2>믿고 나올 수 있게</h2>
+      <p>만남의 질은 결국 신뢰에서 나와요. 라운드는 검증을 가장 먼저 챙겨요.</p>
+    </div>
+    <div class="tcards">
+      <div class="tcard reveal"><div class="ic">✓</div><h4>3단계 인증</h4><p>본인 확인 · 직장(재직) · 미혼 여부까지 확인된 분들만 참여해요.</p></div>
+      <div class="tcard reveal"><div class="ic">⚖</div><h4>성비 1:1</h4><p>남녀 인원을 동수로 맞춰 진행해요. 한쪽으로 기울지 않아요.</p></div>
+      <div class="tcard reveal"><div class="ic">♥</div><h4>비공개 애프터</h4><p>선택은 서로에게만 공개. 거절 사실이 드러나지 않아 부담이 적어요.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 다가오는 회차 -->
+<section class="sec" id="rounds">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Upcoming rounds</span>
+      <h2>다가오는 회차</h2>
+      <p>원하는 날짜·지역·연령대의 회차를 골라 신청하세요. (예시 일정입니다.)</p>
+    </div>
+    <div class="round-list reveal">
+      <div class="round">
+        <div class="round__date"><div class="d pop">28</div><div class="m">JUN</div></div>
+        <div class="round__info"><h4>금요일 저녁 · 강남 라운드</h4><div class="round__meta"><span>20:00–22:30</span><span>20대 후반–30대 초반</span><span>성비 <b>8:8</b></span></div></div>
+        <div class="round__cta"><span class="badge badge--soon">마감 임박 · 2석</span><a href="#apply" class="btn btn--coral btn--sm">신청</a></div>
+      </div>
+      <div class="round">
+        <div class="round__date"><div class="d pop">29</div><div class="m">JUN</div></div>
+        <div class="round__info"><h4>토요일 오후 · 홍대 와인 라운드</h4><div class="round__meta"><span>15:00–18:00</span><span>30대</span><span>성비 <b>6:6</b></span></div></div>
+        <div class="round__cta"><span class="badge badge--open">모집 중</span><a href="#apply" class="btn btn--coral btn--sm">신청</a></div>
+      </div>
+      <div class="round">
+        <div class="round__date"><div class="d pop">05</div><div class="m">JUL</div></div>
+        <div class="round__info"><h4>토요일 저녁 · 종로 한옥 라운드</h4><div class="round__meta"><span>19:00–21:30</span><span>20대 후반–30대 중반</span><span>성비 <b>7:7</b></span></div></div>
+        <div class="round__cta"><span class="badge badge--open">모집 중</span><a href="#apply" class="btn btn--coral btn--sm">신청</a></div>
+      </div>
+      <div class="round">
+        <div class="round__date"><div class="d pop">21</div><div class="m">JUN</div></div>
+        <div class="round__info"><h4>지난 회차 · 성수 보드게임 라운드</h4><div class="round__meta"><span>마감</span><span>참여 14명</span><span>매칭 4쌍</span></div></div>
+        <div class="round__cta"><span class="badge badge--full">마감</span><a href="#apply" class="btn btn--ghost btn--sm">대기 신청</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 테마 -->
+<section class="sec" id="themes">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Concept rounds</span>
+      <h2>취향대로 고르는 테마</h2>
+      <p>대화 소재가 자연스럽게 풀리도록, 회차마다 테마를 더했어요.</p>
+    </div>
+    <div class="theme-grid reveal">
+      <div class="theme"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=500&q=80" alt="와인 라운드" loading="lazy"><small class="pop">Wine</small><span>와인 라운드</span></div>
+      <div class="theme"><img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=500&q=80" alt="취향 매칭 라운드" loading="lazy"><small class="pop">Taste</small><span>취향 매칭</span></div>
+      <div class="theme"><img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=500&q=80" alt="루프탑 라운드" loading="lazy"><small class="pop">Rooftop</small><span>루프탑 나잇</span></div>
+      <div class="theme"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=500&q=80" alt="다이닝 라운드" loading="lazy"><small class="pop">Dining</small><span>다이닝 라운드</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 후기 + 통계 -->
+<section class="sec" id="voices">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Voices</span>
+      <h2>숫자와 후기로 증명해요</h2>
+    </div>
+    <div class="stats reveal">
+      <div class="stat"><div class="num pop">320<span style="font-size:1.2rem">쌍</span></div><div class="lab">누적 매칭 성사</div></div>
+      <div class="stat"><div class="num pop">4.8</div><div class="lab">참가자 평균 만족도 (5점)</div></div>
+      <div class="stat"><div class="num pop">62<span style="font-size:1.2rem">%</span></div><div class="lab">3개월 내 재참여율</div></div>
+    </div>
+    <div class="reviews reveal">
+      <div class="review"><div class="star">★★★★★</div><p>“소개팅 한 번 잡는 시간에 10명을 만났어요. 어색하면 10분 뒤 자리 바꾸니까 부담이 없네요.”</p><div class="who">30대 · 직장인</div></div>
+      <div class="review"><div class="star">★★★★★</div><p>“인증을 꼼꼼히 해서 안심됐어요. 성비도 딱 맞고, 분위기가 깔끔했습니다.”</p><div class="who">20대 후반 · 디자이너</div></div>
+      <div class="review"><div class="star">★★★★★</div><p>“애프터가 비공개라 거절 걱정이 없어서 좋았어요. 그날 바로 다음 약속 잡았습니다.”</p><div class="who">30대 초반 · 개발자</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 참가 신청 -->
+<section class="sec" id="apply">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Apply</span>
+      <h2>참가 신청</h2>
+      <p>아래로 남겨 주시면 인증 안내와 함께 신청을 도와드려요.</p>
+    </div>
+    <div class="apply-card reveal">
+      <form class="form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="field"><label>성함 / 닉네임</label><input type="text" name="name" required></div>
+        <div class="field"><label>연락처</label><input type="tel" name="phone" inputmode="tel" required></div>
+        <div class="field"><label>성별</label><select name="gender"><option>여성</option><option>남성</option></select></div>
+        <div class="field"><label>나이대</label><select name="age"><option>20대 초반</option><option>20대 후반</option><option>30대 초반</option><option>30대 중반</option><option>30대 후반+</option></select></div>
+        <div class="field"><label>희망 회차 / 지역</label><input type="text" name="round" placeholder="예) 6/29 홍대 와인 라운드"></div>
+        <div class="field"><label>직업 (인증용)</label><input type="text" name="job" placeholder="예) 직장인 / IT"></div>
+        <div class="field full"><label>하고 싶은 말 (선택)</label><textarea name="msg" placeholder="원하는 분위기·궁금한 점 등"></textarea></div>
+        <div class="field full"><button type="submit" class="btn btn--coral" style="width:100%">참가 신청 보내기</button></div>
+      </form>
+      <p class="apply-note">신청 후 본인·직장·미혼 인증 절차가 진행됩니다. * 위 회차·통계·요금은 샘플 예시입니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="kicker">FAQ</span><h2>자주 묻는 질문</h2></div>
+    <div class="faq reveal">
+      <div class="qa"><button>혼자 가도 괜찮나요? <span class="x">+</span></button><div class="a"><p>네, 대부분 혼자 오세요. 1:1 성비로 모두 같은 출발선이라 어색하지 않아요.</p></div></div>
+      <div class="qa"><button>인증은 어떻게 하나요? <span class="x">+</span></button><div class="a"><p>신청 후 본인 확인, 재직(직장), 미혼 여부를 간단한 서류로 확인해요. 검증된 분들만 한자리에 모입니다.</p></div></div>
+      <div class="qa"><button>애프터가 안 되면 서로 알게 되나요? <span class="x">+</span></button><div class="a"><p>아니요. 선택은 서로에게만 공개돼요. 매칭이 된 경우에만 연락처가 교환됩니다.</p></div></div>
+      <div class="qa"><button>참가비와 환불은요? <span class="x">+</span></button><div class="a"><p>회차·테마에 따라 다르며, 신청 시 안내드려요. 환불 규정도 함께 확인하실 수 있어요. (요금은 샘플에서 예시 처리)</p></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="foot__brand">라운드 · ROUND</div>
+      <small>10분 로테이션 소개팅 · 만 19세 이상<br>© 2026 ROUND. 이피웹 제작 샘플.</small>
+    </div>
+    <div class="foot__sns">
+      <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://pf.kakao.com" target="_blank" rel="noopener">카카오 채널</a>
+      <a href="#apply">참가 신청</a>
+    </div>
+  </div>
+</footer>
+
+<div class="mbar">
+  <a href="https://pf.kakao.com" target="_blank" rel="noopener" class="m-kakao">카카오 문의</a>
+  <a href="#apply" class="m-apply">참가 신청</a>
+</div>
+
+<script>
+/* 로테이션 다이어그램: 자리 배치 */
+(function(){
+  function build(ring, n){
+    if(!ring) return;
+    var R=132;
+    for(var i=0;i<n;i++){
+      var ang=(i/n)*2*Math.PI - Math.PI/2;
+      var seat=document.createElement('div');
+      seat.className='rot__seat '+(i%2===0?'m':'f');
+      seat.textContent=(i%2===0?'남':'여');
+      seat.style.transform='translate('+(Math.cos(ang)*R)+'px,'+(Math.sin(ang)*R)+'px)';
+      ring.appendChild(seat);
+    }
+  }
+  build(document.getElementById('rotRing'),10);
+  build(document.getElementById('rotRing2'),8);
+})();
+
+/* 상단바 + 버거 */
+(function(){
+  var tb=document.getElementById('topbar');
+  function s(){ tb.classList.toggle('solid', window.scrollY>30); }
+  window.addEventListener('scroll',s,{passive:true}); s();
+  var b=document.getElementById('burger'), dr=document.getElementById('drawer');
+  if(b&&dr){ b.addEventListener('click',function(){dr.classList.toggle('open');});
+    dr.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){dr.classList.remove('open');});}); }
+})();
+
+/* FAQ 아코디언 */
+(function(){
+  document.querySelectorAll('.qa button').forEach(function(btn){
+    btn.addEventListener('click',function(){ btn.parentElement.classList.toggle('open'); });
+  });
+})();
+
+/* reveal + rescue */
+(function(){
+  if(window.matchMedia('(min-width:881px)').matches && 'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  }
+  function rv(){var els=document.querySelectorAll('.reveal:not(.in)');for(var i=0;i<els.length;i++){var r=els[i].getBoundingClientRect();if(r.top<innerHeight*0.92&&r.bottom>0)els[i].classList.add('in');}}
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)setTimeout(rv,60);});
+  window.addEventListener('load',function(){setTimeout(rv,1200);});
+})();
+
+/* 공통 폼 핸들러: 인페이지 성공/실패 + 중복제출 방지 (이피웹) */
+(function(){
+  var forms=document.querySelectorAll('form[action*="formspree.io"]');
+  forms.forEach(function(form){
+    var btn=form.querySelector('[type="submit"]');
+    var label=btn?btn.textContent:'';
+    var msg=document.createElement('p');
+    msg.setAttribute('role','status');
+    msg.style.cssText='grid-column:1/-1;margin:6px 0 0;font-size:.95rem;line-height:1.55;display:none;font-weight:600';
+    form.appendChild(msg);
+    function show(t,ok){msg.style.display='block';msg.style.color=ok?'#1F9D55':'#D63E1E';msg.textContent=t;}
+    function reset(){if(btn){btn.disabled=false;btn.style.opacity='';btn.style.cursor='';btn.textContent=label;}}
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(btn){btn.disabled=true;btn.style.opacity='.6';btn.style.cursor='default';btn.textContent='보내는 중…';}
+      if(/YOUR_FORM_ID/.test(form.getAttribute('action')||'')){
+        setTimeout(function(){show('참가 신청이 접수되었습니다. 인증 안내와 함께 연락드릴게요.',true);form.reset();reset();},700);return;
+      }
+      fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
+        .then(function(r){if(r.ok){show('참가 신청이 접수되었습니다. 인증 안내와 함께 연락드릴게요.',true);form.reset();}else{show('전송에 실패했어요. 카카오 채널로 문의해 주세요.',false);}})
+        .catch(function(){show('전송에 실패했어요. 카카오 채널로 문의해 주세요.',false);})
+        .finally(reset);
+    });
+  });
+})();
+</script>
+</body>
+</html>
