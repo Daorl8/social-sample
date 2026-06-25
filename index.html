@@ -211,7 +211,7 @@ footer{background:var(--ink);color:#FCF3EC;padding:54px 0 110px}
 
 /* ───── 실험 효과 (영감 풀 적용) ───── */
 /* 필름 그레인 */
-.grain{position:fixed;inset:0;z-index:9997;pointer-events:none;opacity:.06;mix-blend-mode:multiply;
+.grain{position:fixed;inset:0;z-index:9997;pointer-events:none;opacity:.14;mix-blend-mode:multiply;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:180px 180px;animation:grain 5s steps(5) infinite}
 @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-2%)}80%{transform:translate(3%,2%)}100%{transform:translate(0,0)}}
@@ -219,7 +219,8 @@ footer{background:var(--ink);color:#FCF3EC;padding:54px 0 110px}
 /* 마퀴 띠 */
 .marquee{overflow:hidden;background:var(--wine);color:#FCF3EC;padding:13px 0;white-space:nowrap;position:relative;z-index:2}
 .marquee__t{display:inline-flex;will-change:transform;animation:marq 26s linear infinite}
-.marquee__t span{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:1.28rem;letter-spacing:.01em}
+.marquee__t span{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:1.55rem;letter-spacing:.01em}
+.sbar{position:fixed;top:0;left:0;height:3px;width:0;background:var(--wine);z-index:9999;box-shadow:0 0 8px rgba(168,66,90,.6)}
 .marquee__t b{color:var(--amber-soft);font-style:normal;font-weight:600;margin:0 6px}
 @keyframes marq{to{transform:translateX(-50%)}}
 .marquee:hover .marquee__t{animation-play-state:paused}
@@ -234,12 +235,13 @@ footer{background:var(--ink);color:#FCF3EC;padding:54px 0 110px}
 .nav a:not(.btn)::after{content:"";position:absolute;left:0;right:100%;bottom:-4px;height:1.5px;background:var(--wine);transition:right .28s ease}
 .nav a:not(.btn):hover::after{right:0}
 
-@media(prefers-reduced-motion:reduce){.grain,.marquee__t{animation:none}}
+@media(prefers-reduced-motion:reduce){.grain{animation:none}}
 @media(hover:none),(pointer:coarse){.cursor{display:none}}
 </style>
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
+<div class="sbar" id="sbar" aria-hidden="true"></div>
 
 <div class="topbar" id="topbar">
   <a href="#top" class="brand"><span class="mark"></span> 라운드</a>
@@ -547,11 +549,17 @@ footer{background:var(--ink);color:#FCF3EC;padding:54px 0 110px}
   });
 })();
 
-/* ── 실험 효과: 키네틱 히어로 (스크롤에 따라 자간·투명도) ── */
+/* ── 실험 효과: 키네틱 히어로 + 스크롤 진행바 (스크롤 기반, 항상 동작) ── */
 (function(){
-  if(matchMedia('(prefers-reduced-motion:reduce)').matches) return;
-  var h=document.querySelector('.hero h1'); if(!h) return;
-  addEventListener('scroll',function(){var y=Math.min(scrollY,560)/560;h.style.letterSpacing=(-0.02+y*0.12)+'em';h.style.opacity=(1-y*0.5).toFixed(3);},{passive:true});
+  var h=document.querySelector('.hero h1');
+  var sb=document.getElementById('sbar');
+  function onScroll(){
+    var max=document.documentElement.scrollHeight-innerHeight;
+    var p=max>0?scrollY/max:0;
+    if(sb) sb.style.width=(p*100)+'%';
+    if(h){var y=Math.min(scrollY,560)/560;h.style.letterSpacing=(-0.02+y*0.14)+'em';h.style.opacity=(1-y*0.55).toFixed(3);}
+  }
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
 })();
 </script>
 </body>
