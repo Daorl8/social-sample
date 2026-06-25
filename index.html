@@ -21,14 +21,14 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
 :root{
-  --bg:#FBF0E8; --paper:#FFFCF8; --cream:#FCF3EC;
-  --ink:#33232A; --muted:#8A7066; --faint:#B7A296;
-  --wine:#A8425A; --wine-d:#8B3145; --wine-soft:#F3DBDE;
-  --amber:#CF8F45; --amber-soft:#FAE9CC;
-  --plum:#5C3550; --plum-soft:#ECDDE7;
-  --line:#EFE0D5; --line2:#E4D0C4;
+  --bg:#F3F0EA; --paper:#FCFAF6; --cream:#ECE8E0;
+  --ink:#23201D; --muted:#6B635B; --faint:#A79E94;
+  --wine:#8B3A44; --wine-d:#6E2C35; --wine-soft:#E7DADB;
+  --amber:#A86B4C; --amber-soft:#E8DCD0;
+  --plum:#4F4750; --plum-soft:#E0DBDE;
+  --line:#E6DFD5; --line2:#D7CEC2;
   --radius:20px; --radius-s:14px;
-  --shadow:0 20px 54px -26px rgba(120,50,55,.34);
+  --shadow:0 20px 54px -26px rgba(60,40,38,.30);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:80px;-webkit-text-size-adjust:100%}
@@ -72,7 +72,7 @@ a{color:inherit;text-decoration:none}
 .hero{position:relative;padding:128px 0 72px;overflow:hidden}
 .hero__bg{position:absolute;inset:0;z-index:0}
 .hero__bg img{width:100%;height:100%;object-fit:cover;opacity:.26;filter:saturate(.95)}
-.hero__bg::after{content:"";position:absolute;inset:0;background:radial-gradient(80% 70% at 84% 12%,rgba(207,143,69,.26),transparent 56%),linear-gradient(180deg,rgba(251,240,232,.62),var(--bg) 88%)}
+.hero__bg::after{content:"";position:absolute;inset:0;background:radial-gradient(80% 70% at 84% 12%,rgba(168,107,76,.18),transparent 56%),linear-gradient(180deg,rgba(243,240,234,.6),var(--bg) 88%)}
 .hero__in{position:relative;z-index:2;display:grid;grid-template-columns:1.12fr .88fr;gap:42px;align-items:center}
 .hero h1{font-size:clamp(2.4rem,5.6vw,3.9rem);font-weight:700;line-height:1.18;letter-spacing:-.02em;margin:14px 0 0}
 .hero h1 .em{color:var(--wine)}
@@ -133,7 +133,7 @@ section{position:relative}
 .round__cta{display:flex;flex-direction:column;align-items:flex-end;gap:9px}
 .badge{font-size:.72rem;font-weight:600;padding:4px 12px;border-radius:30px}
 .badge--open{background:var(--wine-soft);color:var(--wine-d)}
-.badge--soon{background:var(--amber-soft);color:#9A6B22}
+.badge--soon{background:var(--amber-soft);color:#8A4F32}
 .badge--full{background:#EFE7DF;color:var(--faint)}
 
 /* 테마 */
