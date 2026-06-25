@@ -208,9 +208,38 @@ footer{background:var(--ink);color:#FCF3EC;padding:54px 0 110px}
   .mbar{display:grid}body{padding-bottom:72px}
   .sec{padding:64px 0}
 }
+
+/* ───── 실험 효과 (영감 풀 적용) ───── */
+/* 필름 그레인 */
+.grain{position:fixed;inset:0;z-index:9997;pointer-events:none;opacity:.06;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:180px 180px;animation:grain 5s steps(5) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-2%)}80%{transform:translate(3%,2%)}100%{transform:translate(0,0)}}
+
+/* 마퀴 띠 */
+.marquee{overflow:hidden;background:var(--wine);color:#FCF3EC;padding:13px 0;white-space:nowrap;position:relative;z-index:2}
+.marquee__t{display:inline-flex;will-change:transform;animation:marq 26s linear infinite}
+.marquee__t span{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:1.28rem;letter-spacing:.01em}
+.marquee__t b{color:var(--amber-soft);font-style:normal;font-weight:600;margin:0 6px}
+@keyframes marq{to{transform:translateX(-50%)}}
+.marquee:hover .marquee__t{animation-play-state:paused}
+
+/* 커스텀 커서 + 자석 버튼 */
+.cursor{position:fixed;top:0;left:0;width:34px;height:34px;border:1.6px solid var(--wine);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:9998;mix-blend-mode:multiply;transition:width .22s,height .22s,background .22s}
+.cursor.grow{width:56px;height:56px;background:rgba(168,66,90,.12)}
+.magnetic{transition:transform .2s cubic-bezier(.2,.8,.3,1)}
+
+/* 내비 링크 호버 와이프 밑줄 */
+.nav a:not(.btn){position:relative}
+.nav a:not(.btn)::after{content:"";position:absolute;left:0;right:100%;bottom:-4px;height:1.5px;background:var(--wine);transition:right .28s ease}
+.nav a:not(.btn):hover::after{right:0}
+
+@media(prefers-reduced-motion:reduce){.grain,.marquee__t{animation:none}}
+@media(hover:none),(pointer:coarse){.cursor{display:none}}
 </style>
 </head>
 <body>
+<div class="grain" aria-hidden="true"></div>
 
 <div class="topbar" id="topbar">
   <a href="#top" class="brand"><span class="mark"></span> 라운드</a>
@@ -219,7 +248,7 @@ footer{background:var(--ink);color:#FCF3EC;padding:54px 0 110px}
     <a href="#rounds">다가오는 회차</a>
     <a href="#voices">후기</a>
     <a href="#faq">FAQ</a>
-    <a href="#apply" class="btn btn--wine btn--sm">이번 회차 신청</a>
+    <a href="#apply" class="btn btn--wine btn--sm magnetic">이번 회차 신청</a>
   </nav>
   <button class="burger" id="burger" aria-label="메뉴"><span></span><span></span><span></span></button>
 </div>
@@ -240,8 +269,8 @@ footer{background:var(--ink);color:#FCF3EC;padding:54px 0 110px}
       <h1>취향이 통하는 사람과,<br><span class="em">설렘이 시작되는</span> 저녁.</h1>
       <p class="hero__sub">비슷한 결의 어른들이 한자리에. 10분씩 천천히 대화하고, 마음이 가는 사람에게만 조용히 다음을 건네요.</p>
       <div class="hero__btns">
-        <a href="#rounds" class="btn btn--wine">다가오는 회차 보기</a>
-        <a href="#how" class="btn btn--ghost">어떻게 만나는지</a>
+        <a href="#rounds" class="btn btn--wine magnetic">다가오는 회차 보기</a>
+        <a href="#how" class="btn btn--ghost magnetic">어떻게 만나는지</a>
       </div>
       <div class="trust-row">
         <span class="chip"><i></i>취향으로 모인 사람들</span>
@@ -256,6 +285,14 @@ footer{background:var(--ink);color:#FCF3EC;padding:54px 0 110px}
     </div>
   </div>
 </header>
+
+<!-- 마퀴 띠 -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__t">
+    <span>마주 앉은 저녁<b>·</b>와인 한 잔<b>·</b>10분의 대화<b>·</b>취향이 통하는 사람<b>·</b>조용히 건네는 마음<b>·</b>&nbsp;</span>
+    <span>마주 앉은 저녁<b>·</b>와인 한 잔<b>·</b>10분의 대화<b>·</b>취향이 통하는 사람<b>·</b>조용히 건네는 마음<b>·</b>&nbsp;</span>
+  </div>
+</div>
 
 <!-- 어떻게 만나요 -->
 <section class="sec" id="how">
@@ -491,6 +528,30 @@ footer{background:var(--ink);color:#FCF3EC;padding:54px 0 110px}
         .finally(reset);
     });
   });
+})();
+
+/* ── 실험 효과: 커스텀 커서 + 자석 버튼 (데스크톱·모션 허용시) ── */
+(function(){
+  if(matchMedia('(pointer:coarse)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  var cur=document.createElement('div');cur.className='cursor';cur.style.opacity='0';document.body.appendChild(cur);
+  var mx=innerWidth/2,my=innerHeight/2,cx=mx,cy=my,on=false;
+  addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;on=true;},{passive:true});
+  (function loop(){cx+=(mx-cx)*.18;cy+=(my-cy)*.18;cur.style.transform='translate('+cx+'px,'+cy+'px) translate(-50%,-50%)';cur.style.opacity=on?'1':'0';requestAnimationFrame(loop);})();
+  document.querySelectorAll('a,button,.magnetic').forEach(function(el){
+    el.addEventListener('mouseenter',function(){cur.classList.add('grow');});
+    el.addEventListener('mouseleave',function(){cur.classList.remove('grow');});
+  });
+  document.querySelectorAll('.magnetic').forEach(function(el){
+    el.addEventListener('mousemove',function(e){var r=el.getBoundingClientRect();el.style.transform='translate('+(e.clientX-(r.left+r.width/2))*.3+'px,'+(e.clientY-(r.top+r.height/2))*.3+'px)';});
+    el.addEventListener('mouseleave',function(){el.style.transform='';});
+  });
+})();
+
+/* ── 실험 효과: 키네틱 히어로 (스크롤에 따라 자간·투명도) ── */
+(function(){
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  var h=document.querySelector('.hero h1'); if(!h) return;
+  addEventListener('scroll',function(){var y=Math.min(scrollY,560)/560;h.style.letterSpacing=(-0.02+y*0.12)+'em';h.style.opacity=(1-y*0.5).toFixed(3);},{passive:true});
 })();
 </script>
 </body>
