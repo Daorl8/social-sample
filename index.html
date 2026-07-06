@@ -253,7 +253,7 @@ footer{background:var(--ink);color:#FCF3EC;padding:54px 0 110px}
     <a href="#faq">FAQ</a>
     <a href="#apply" class="btn btn--wine btn--sm magnetic">이번 회차 신청</a>
   </nav>
-  <button class="burger" id="burger" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <button class="burger" id="burger" aria-label="메뉴" aria-expanded="false" aria-controls="drawer"><span></span><span></span><span></span></button>
 </div>
 <div class="drawer" id="drawer">
   <a href="#how">어떻게 만나요</a>
@@ -485,8 +485,8 @@ footer{background:var(--ink);color:#FCF3EC;padding:54px 0 110px}
   function s(){ tb.classList.toggle('solid', window.scrollY>30); }
   window.addEventListener('scroll',s,{passive:true}); s();
   var b=document.getElementById('burger'), dr=document.getElementById('drawer');
-  if(b&&dr){ b.addEventListener('click',function(){dr.classList.toggle('open');});
-    dr.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){dr.classList.remove('open');});}); }
+  if(b&&dr){ b.addEventListener('click',function(){b.setAttribute('aria-expanded',dr.classList.toggle('open'));});
+    dr.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){dr.classList.remove('open');b.setAttribute('aria-expanded','false');});}); }
 })();
 
 /* FAQ */
