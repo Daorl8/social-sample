@@ -34,7 +34,7 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{-webkit-text-size-adjust:100%;color-scheme:dark;scroll-padding-top:var(--bar);overflow-x:hidden}
-  body{font-family:var(--kr);background:var(--bg);color:var(--ink);line-height:1.75;font-size:16px;
+  body{font-family:var(--kr);background:radial-gradient(58% 42% at 50% -4%,rgba(228,174,112,.11),transparent 60%),radial-gradient(54% 42% at 84% 74%,rgba(206,110,122,.09),transparent 62%),radial-gradient(46% 36% at 12% 42%,rgba(228,174,112,.06),transparent 60%),var(--bg);background-attachment:fixed;color:var(--ink);line-height:1.75;font-size:16px;
     word-break:keep-all;overflow-wrap:break-word;overflow-x:hidden;-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
   ::selection{background:var(--amber);color:#1a120b}
@@ -78,7 +78,7 @@
   .btn-sm{padding:10px 20px;font-size:.86rem}
 
   /* HERO — 풀블리드 시네마틱 */
-  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
+  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;padding:0;border-top:none}
   .hero__bg{position:absolute;inset:0;z-index:0}
   .hero__bg img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
   .hero__bg::after{content:"";position:absolute;inset:0;background:
@@ -103,7 +103,8 @@
   .marquee:hover .marquee__t{animation-play-state:paused}
   @keyframes marq{to{transform:translateX(-50%)}}
 
-  section{position:relative;padding:clamp(80px,11vw,150px) 0}
+  section{position:relative;padding:clamp(60px,8vw,110px) 0;border-top:1px solid var(--line)}
+  #curate,#faq{background:var(--bg2)}
   .sec-head{max-width:52ch;margin:0 auto clamp(46px,6vw,72px);text-align:center}
   .sec-head .kick{display:block;margin-bottom:14px}
   .sec-head h2{font-family:var(--ser);font-weight:500;font-size:clamp(2.1rem,5vw,3.4rem);line-height:1.12;letter-spacing:-.01em}
